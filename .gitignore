@@ -1,0 +1,11 @@
+ccs
+
+nimcache/
+nimblecache/
+htmldocs/
+
+testresults/
+tests/megatest
+tests/megatest.nim
+output*
+
