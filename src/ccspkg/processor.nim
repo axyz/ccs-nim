@@ -9,9 +9,12 @@ func newProcessor*(plugins: seq[Plugin]): Processor =
 
 proc process*(self: Processor, node: Node) =
   for p in self.plugins:
-    # TOFIX: see https://github.com/nim-lang/Nim/issues/16740
     let plugin = p
     if node.kind == Sheet: plugin.once(node)
+
+  for p in self.plugins:
+    # FIXME: see https://github.com/nim-lang/Nim/issues/16740
+    let plugin = p
 
     node.walk do (n: Node):
       case n.kind
@@ -21,6 +24,9 @@ proc process*(self: Processor, node: Node) =
       of Decl: plugin.decl(n)
       of Rule: plugin.rule(n)
 
+  for p in self.plugins:
+    let plugin = p
+
     node.walk do (n: Node):
       case n.kind
       of Sheet: plugin.sheetExit(n)
@@ -28,3 +34,5 @@ proc process*(self: Processor, node: Node) =
       of Comment: plugin.commentExit(n)
       of Decl: plugin.declExit(n)
       of Rule: plugin.ruleExit(n)
+
+

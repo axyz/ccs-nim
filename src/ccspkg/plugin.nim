@@ -39,7 +39,7 @@ func newPlugin*(
     comment: comment, 
     commentExit: commentExit, 
     decl: decl, 
-    declExit: decl, 
+    declExit: declExit, 
     rule: rule,
-    ruleExit: rule
+    ruleExit: ruleExit
   )

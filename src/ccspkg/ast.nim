@@ -158,8 +158,8 @@ func remove*(self: Node) =
     parent.children = parent.children.filter(a => a != self)
 
 proc walk*(self: Node, visit: proc (n: Node)) =
+  visit(self)
   for child in self.children:
-    visit(child)
     walk(child, visit)
 
 proc walkRules*(self: Node, visit: proc(n: Node)) =
